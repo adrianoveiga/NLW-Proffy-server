@@ -19,7 +19,8 @@ export async function up(knex: Knex){
              .onDelete('CASCADE');
         
         table.timestamp('created_at')
-             .defaultTo('now()')
+            //  .defaultTo('now()')  // use now() for MySQL or Postgresql
+             .defaultTo(knex.raw('CURRENT_TIMESTAMP'))  // use for Sqlite
              .notNullable();
     });
 }
